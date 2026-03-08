@@ -1,0 +1,27 @@
+project_name: project_beta
+
+repo_url: git@github.com:yanixon/project_beta.git
+repo_branch: master
+
+server:
+  host: 206.81.13.101
+  user: root
+  ssh_key: ~/.ssh/id_ed25519
+  base_dir: /opt/django-apps
+
+app:
+  django_settings: config.settings.production
+  db_name: project_beta_db
+  db_user: project_beta_user
+  python_version: "3.12"
+
+gunicorn:
+  socket: /run/gunicorn-project_beta.sock
+  workers: 3
+  timeout: 120
+
+nginx:
+  server_name: 206.81.13.101
+
+database:
+  init_mode: migrate

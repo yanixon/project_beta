@@ -1,0 +1,82 @@
+# deploy.yml — Deployment configuration for django-droplet-deploy
+#
+# Copy this file to deploy.yml and fill in your project-specific values.
+# All fields marked REQUIRED must be present. Optional fields show their defaults.
+
+# --------------------------------------------------------------------------
+# Project identity
+# --------------------------------------------------------------------------
+
+# REQUIRED — Unique project name (letters, digits, underscores).
+project_name: <your_project_name>
+
+# REQUIRED — Git clone URL (SSH or HTTPS).
+repo_url: <git@github.com:user/repo.git>
+
+# REQUIRED — Branch to deploy from.
+repo_branch: master
+
+# --------------------------------------------------------------------------
+# Server connection
+# --------------------------------------------------------------------------
+server:
+  # REQUIRED — IP address or hostname of the target server.
+  host: <server_ip_or_hostname>
+
+  # REQUIRED — SSH user (must have sudo privileges).
+  user: root
+
+  # REQUIRED — Path to the local SSH private key.
+  ssh_key: ~/.ssh/id_ed25519
+
+  # REQUIRED — Base directory on the server for deployments.
+  base_dir: /opt/django-apps
+
+# --------------------------------------------------------------------------
+# Django application
+# --------------------------------------------------------------------------
+app:
+  # REQUIRED — Dotted path to the production settings module.
+  django_settings: <config.settings.production>
+
+  # REQUIRED — PostgreSQL database name.
+  db_name: <project_db>
+
+  # REQUIRED — PostgreSQL role (user) that owns the database.
+  db_user: <project_user>
+
+  # REQUIRED — Python version on the server (must match an installed python3.X).
+  python_version: "3.12"
+
+  # OPTIONAL — Management command to seed the database (default: seed_data).
+  # seed_command: seed_data
+
+  # OPTIONAL — URL prefix for path-based routing (default: derived from project_name).
+  # url_prefix: alpha
+
+# --------------------------------------------------------------------------
+# Gunicorn (WSGI server)
+# --------------------------------------------------------------------------
+gunicorn:
+  # REQUIRED — Unix socket path.
+  socket: /run/gunicorn-<project_name>.sock
+
+  # REQUIRED — Number of worker processes.
+  workers: 3
+
+  # REQUIRED — Worker timeout in seconds.
+  timeout: 120
+
+# --------------------------------------------------------------------------
+# Nginx (reverse proxy)
+# --------------------------------------------------------------------------
+nginx:
+  # REQUIRED — server_name directive (IP, domain, or space-separated list).
+  server_name: <server_ip_or_domain>
+
+# --------------------------------------------------------------------------
+# Database initialization
+# --------------------------------------------------------------------------
+database:
+  # REQUIRED — How to initialize the database on deploy (migrate).
+  init_mode: migrate
