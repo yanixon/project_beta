@@ -20,6 +20,7 @@ parse_deploy_yml() {
     APP_DB_NAME=""
     APP_DB_USER=""
     APP_PYTHON_VERSION=""
+    APP_URL_PREFIX=""
     GUNICORN_SOCKET=""
     GUNICORN_WORKERS=""
     GUNICORN_TIMEOUT=""
