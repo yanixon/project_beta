@@ -10,7 +10,7 @@ server:
   base_dir: /opt/django-apps
 
 app:
-  django_settings: config.settings.production
+  django_settings: config.production
   db_name: project_beta_db
   db_user: project_beta_user
   python_version: "3.12"

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Project Beta{% endblock %}</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f0f0f0; }
+        nav { background: #34495e; padding: 10px; margin-bottom: 20px; border-radius: 4px; }
+        nav a { color: white; text-decoration: none; margin-right: 15px; }
+        nav a:hover { text-decoration: underline; }
+        .container { background: white; padding: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="/">Home</a>
+            <a href="/auth/logout/">Logout ({{ user.email }})</a>
+        {% else %}
+            <a href="/auth/login/">Login</a>
+            <a href="/auth/register/">Register</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
