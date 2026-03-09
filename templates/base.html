@@ -13,11 +13,11 @@
 <body>
     <nav>
         {% if user.is_authenticated %}
-            <a href="/">Home</a>
-            <a href="/auth/logout/">Logout ({{ user.email }})</a>
+            <a href="{% url 'note-list' %}">Home</a>
+            <a href="{% url 'shared_auth:logout' %}">Logout ({{ user.email }})</a>
         {% else %}
-            <a href="/auth/login/">Login</a>
-            <a href="/auth/register/">Register</a>
+            <a href="{% url 'shared_auth:login' %}">Login</a>
+            <a href="{% url 'shared_auth:register' %}">Register</a>
         {% endif %}
     </nav>
     <div class="container">
